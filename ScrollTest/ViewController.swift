@@ -14,6 +14,8 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
+    @IBOutlet weak var secondTableView: UITableView!
+
     var isDragging = false
 
     override func viewDidLoad() {
@@ -59,6 +61,10 @@ extension ViewController: UITableViewDelegate {
 extension ViewController: UIScrollViewDelegate {
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard scrollView != self.secondTableView else {
+            return
+        }
+
         if isDragging, let parentScroll = scrollView.superview as? UIScrollView {
 
             // Accumulate offset when negative
@@ -93,6 +99,8 @@ extension ViewController: UIScrollViewDelegate {
             }
         }
         //print("\(offset)")
+
+        secondTableView.contentOffset = self.tableView.contentOffset
     }
 
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
