@@ -16,9 +16,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         let v = UIView()
-        v.frame = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 200)
+        v.frame = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 400)
         v.backgroundColor = UIColor.clear
         tableView.tableHeaderView = v
+        tableView.backgroundView = BackgroundView()
+        tableView.backgroundColor = UIColor.clear
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,7 +45,7 @@ extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "Cell") ?? UITableViewCell(style: .default, reuseIdentifier: "Cell")
         cell.textLabel?.text = "Cell \(indexPath.row)"
-        cell.backgroundColor = UIColor.clear
+        cell.backgroundColor = UIColor.white
         return cell
     }
 }
@@ -71,6 +73,12 @@ extension ViewController: UIScrollViewDelegate {
 //                scrollView.contentOffset.y = 0
 //            }
 //        }
-//        print("\(offset)")
+//        print("\(offset)")z
+
+        scrollView.scrollIndicatorInsets = UIEdgeInsets(top: 400-scrollView.contentOffset.y, left: 0, bottom: 0, right: 0)
     }
+}
+
+class BackgroundView: UIView {
+
 }
